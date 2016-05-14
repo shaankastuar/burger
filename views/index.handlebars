@@ -1,0 +1,58 @@
+<h1>eat da burger!</h1>
+
+<h2>burgers to devour !</h2>
+
+<ul>
+  {{#each burger}}
+    {{#unless this.devour}}
+      <li>
+        {{this.name}}
+
+        <form action="burger/update/{{this.id}}?_method=PUT" method="POST">
+          <input type="hidden" name="devour" value="true">
+          <button type="submit">SLEEP TIME!</button>
+        </form>
+        <form action="burger/delete/{{this.id}}?_method=DELETE" method="POST">
+        <input type="hidden" name="id" value={{this.id}}>
+        <button type="submit">Delete</button>
+      </li>
+    {{/unless}}
+  {{/each}}
+</ul>
+
+<h2>burger that are devour!</h2>
+
+<ul>
+  {{#each burger}}
+    {{#if this.devour}}
+      <li>
+        {{this.name}}
+
+        <form action="burger/update/{{this.id}}?_method=PUT" method="POST">
+          <input type="hidden" name="devour" value="false">
+          <button type="submit">WAKE UP!</button>
+        </form>
+        <form action="burger/delete/{{this.id}}?_method=DELETE" method="POST">
+        <input type="hidden" name="id" value={{this.id}}>
+        <button type="submit">Delete</button>
+      </li>
+    {{/if}}
+  {{/each}}
+</ul>
+
+<h2>Add a burger</h2>
+<form class="create-update-form" action="burger/create" method="POST">
+
+  <div class="form-group">
+    <label for="burger">burger type:</label>
+    <input type="text" id="burger" name="name">
+  </div>
+
+  <div class="form-group">
+    <label for="devour">devour?</label><br>
+    <input type="radio" name="devour" value="1" checked> devour!<br>
+    <input type="radio" name="devour" value="0"> puke up
+  </div>
+
+  <button type="submit">Add burger</button>
+</form>
